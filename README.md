@@ -2,10 +2,8 @@
 
 A new Flutter project.
 
-Add Data
 ![WhatsApp Image 2022-08-31 at 20 50 13](https://user-images.githubusercontent.com/56910391/187695016-a45b96fc-5877-436b-b31e-abb1f36a89ed.jpeg)
 
-Display Page
 ![WhatsApp Image 2022-08-31 at 20 50 12](https://user-images.githubusercontent.com/56910391/187695023-48109ba0-8bb2-4d01-987e-f8bba6481abc.jpeg)
 
 result from Firebase
