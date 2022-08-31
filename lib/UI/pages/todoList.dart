@@ -17,7 +17,7 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-     body: SafeArea(
+      body: SafeArea(
         child: StreamBuilder<List<Todo>>(
             stream: DatabaseService().listTodos(),
             builder: (context, snapshot) {
@@ -68,26 +68,28 @@ class _TodoListPageState extends State<TodoListPage> {
                               DatabaseService().completeTask(todos[index].uid);
                             },
                             leading: Container(
-                              padding: const EdgeInsets.all(2),
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: todos[index].isComplete
-                                  ? const Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : Container(),
-                            ),
+                                padding: const EdgeInsets.all(2),
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: todos[index].isComplete
+                                    ? const Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      )
+                                    : Container),
                             title: Text(
                               todos[index].title,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.grey[200],
                                 fontWeight: FontWeight.w600,
+                                decoration: todos[index].isComplete
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
                             ),
                           ),
@@ -101,14 +103,14 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        child:const Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {
           showDialog(
             context: context,
             builder: (BuildContext context) => (SimpleDialog(
               contentPadding:
-                 const  EdgeInsets.symmetric(horizontal: 26, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
               backgroundColor: Colors.grey[800],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -136,8 +138,8 @@ class _TodoListPageState extends State<TodoListPage> {
                 const Divider(),
                 TextFormField(
                   controller: titleContr,
-                  style:
-                      const TextStyle(color: Colors.white, height: 1.5, fontSize: 20),
+                  style: const TextStyle(
+                      color: Colors.white, height: 1.5, fontSize: 20),
                   autofocus: true,
                   decoration: const InputDecoration(
                       hintText: "Masukkan Tugas",
@@ -157,9 +159,10 @@ class _TodoListPageState extends State<TodoListPage> {
                       ),
                       primary: Colors.blue,
                     ),
-                    onPressed: () async{
+                    onPressed: () async {
                       if (titleContr.text.isNotEmpty) {
-                        await DatabaseService().createNewTodo(titleContr.text.trim());
+                        await DatabaseService()
+                            .createNewTodo(titleContr.text.trim());
                         Navigator.pop(context);
                       }
                     },
